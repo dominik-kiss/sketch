@@ -10,8 +10,15 @@ modeButtons.forEach(modeButton => modeButton.addEventListener("click", setMode))
 function newGrid() {
   if (this == customizeButton) { //Only prompt user for grid size if they clicked 'Custom size'
     gridSize = prompt("Enter a number");
-    while (gridSize > 100 || isNaN(gridSize)) {
+    
+    while (gridSize > 100 || isNaN(gridSize) || gridSize == "") {
       gridSize = prompt("Enter a number (maximum 100)");
+      if(gridSize == null) {
+        break;
+      }
+    }
+    if(gridSize == null) {
+      return;
     }
   }
   removeGrid();
