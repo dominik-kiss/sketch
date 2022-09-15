@@ -8,7 +8,7 @@ const modeButtons = document.querySelectorAll(".mode-button");
 modeButtons.forEach(modeButton => modeButton.addEventListener("click", setMode));
 
 function newGrid() {
-  if (this == customizeButton) {
+  if (this == customizeButton) { //Only prompt user for grid size if they clicked 'Custom size'
     gridSize = prompt("Enter a number");
     while (gridSize > 100 || isNaN(gridSize)) {
       gridSize = prompt("Enter a number (maximum 100)");
@@ -53,13 +53,17 @@ function setMode() {
   newGrid();
 }
 
+function randomNum() {
+  return Math.floor(Math.random()* 1000 / 4);
+}
+
 function changeColor() {
   switch (mode) {
     case 1:
       this.style.backgroundColor = "black";
       break;
     case 2:
-      //Change background-color to random RGB value
+      this.style.backgroundColor = `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
       break;
     case 3:
       //Darken background-color by 10%
