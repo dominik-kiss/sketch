@@ -25,9 +25,10 @@ function turnBlack() {
 
 function newGrid() {
   gridSize = prompt("Enter a number");
-    while (gridSize > 100) {
-      gridSize = prompt("100 maximum");
+    while (gridSize > 100 || isNaN(gridSize)) {
+      gridSize = prompt("Enter a number (maximum 100)");
     }
+
   removeGrid();
   makeGrid(gridSize);
   gridItems = document.querySelectorAll(".grid-item");
