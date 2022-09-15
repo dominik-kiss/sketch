@@ -16,7 +16,7 @@ function newGrid() {
   removeGrid();
   makeGrid(gridSize);
   gridItems = document.querySelectorAll(".grid-item");
-  gridItems.forEach(gridItem => gridItem.addEventListener("mouseenter", turnBlack));
+  gridItems.forEach(gridItem => gridItem.addEventListener("mouseenter", changeColor));
 }
 
 function makeGrid(num) {
@@ -52,11 +52,21 @@ function setMode() {
   console.log(mode);
 }
 
-function turnBlack() {
-  this.style.backgroundColor = "black";
+function changeColor() {
+  switch (mode) {
+    case 1:
+      this.style.backgroundColor = "black";
+      break;
+    case 2:
+      //Change background-color to random RGB value
+      break;
+    case 3:
+      //Darken background-color by 10%
+      break;
+  }
 }
 
 makeGrid(gridSize = 16);
 
 let gridItems = document.querySelectorAll(".grid-item");
-gridItems.forEach(gridItem => gridItem.addEventListener("mouseenter", turnBlack));
+gridItems.forEach(gridItem => gridItem.addEventListener("mouseenter", changeColor));
