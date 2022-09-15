@@ -7,31 +7,39 @@ let mode = 1;
 const modeButtons = document.querySelectorAll(".mode-button");
 modeButtons.forEach(modeButton => modeButton.addEventListener("click", setMode));
 
+function getInput() {
+  let input = "";
+  do {
+    input = prompt("Enter a number (maximum 100)");
+  } while (input > 100 || isNaN(input) || input == "");
+  return input;
+}
+
 function newGrid() {
   if (this == customizeButton) { //Only prompt user for grid size if they clicked 'Custom size'
-    gridSize = prompt("Enter a number");
-    
-    while (gridSize > 100 || isNaN(gridSize) || gridSize == "") {
-      gridSize = prompt("Enter a number (maximum 100)");
-      if(gridSize == null) {
-        break;
-      }
-    }
-    if(gridSize == null) {
+    let userInput = getInput();
+    if (userInput == null) {
       return;
     }
+    else {
+      removeGrid();
+      makeGrid(userInput);
+    }
   }
-  removeGrid();
-  makeGrid(gridSize);
+  else {
+    removeGrid();
+    makeGrid();
+  }
+  
   gridItems = document.querySelectorAll(".grid-item");
   gridItems.forEach(gridItem => gridItem.addEventListener("mouseenter", changeColor));
 }
 
-function makeGrid(num) {
-  container.style.setProperty('--grid-rows', num);
-  container.style.setProperty('--grid-cols', num);
+function makeGrid(gridSize = 16) {
+  container.style.setProperty('--grid-rows', gridSize);
+  container.style.setProperty('--grid-cols', gridSize);
   
-  for (i = 0; i < num * num; i++) { //Create num rows and columns 
+  for (i = 0; i < gridSize * gridSize; i++) { //Create num rows and columns 
     let gridItem = document.createElement("div");
     container.appendChild(gridItem).className = "grid-item";
   }
@@ -78,7 +86,7 @@ function changeColor() {
   }
 }
 
-makeGrid(gridSize = 16);
+makeGrid();
 
 let gridItems = document.querySelectorAll(".grid-item");
 gridItems.forEach(gridItem => gridItem.addEventListener("mouseenter", changeColor));
