@@ -8,11 +8,12 @@ const modeButtons = document.querySelectorAll(".mode-button");
 modeButtons.forEach(modeButton => modeButton.addEventListener("click", setMode));
 
 function newGrid() {
-  gridSize = prompt("Enter a number");
+  if (this == customizeButton) {
+    gridSize = prompt("Enter a number");
     while (gridSize > 100 || isNaN(gridSize)) {
       gridSize = prompt("Enter a number (maximum 100)");
     }
-
+  }
   removeGrid();
   makeGrid(gridSize);
   gridItems = document.querySelectorAll(".grid-item");
@@ -49,7 +50,7 @@ function setMode() {
       mode = 3;
       break;
   }
-  console.log(mode);
+  newGrid();
 }
 
 function changeColor() {
