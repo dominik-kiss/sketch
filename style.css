@@ -4,12 +4,18 @@
   }
 
 body {
-  display: grid;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#button-container {
+  display: flex;
+  gap: 80px;
+  margin-bottom: 50px;
 }
 
 button {
-  display: grid;
   width: 100px;
 }
   
