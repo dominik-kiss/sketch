@@ -32,7 +32,7 @@ function newGrid() {
     makeGrid(currentSize);
   }
   
-  gridItems = document.querySelectorAll(".grid-item");
+  gridItems = document.querySelectorAll("#container > div");
   gridItems.forEach(gridItem => gridItem.addEventListener("mouseenter", changeColor));
 }
 
@@ -42,7 +42,7 @@ function makeGrid(gridSize = 16) {
   
   for (i = 0; i < gridSize * gridSize; i++) { //Create num rows and columns 
     let gridItem = document.createElement("div");
-    container.appendChild(gridItem).className = "grid-item";
+    container.appendChild(gridItem).className = "#FFFFFF";
   }
 }
 
@@ -74,16 +74,17 @@ function randomNum() {
 }
 
 function changeColor() {
-  let startingColor = "hsl(0, 100%, 100%)";
   switch (mode) {
-    case 1:
+    case 1: //Turn from white to black
       this.style.backgroundColor = "black";
       break;
-    case 2:
+    case 2: //Turn hovered box into a random rgb value
       this.style.backgroundColor = `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
       break;
-    case 3:
-      this.style.backgroundColor = "";
+    case 3: //Darken color
+      let newColor = LightenDarkenColor(this.className, -20);
+      this.style.backgroundColor = newColor;
+      this.className = newColor;
       break;
   }
 }
@@ -120,5 +121,5 @@ function LightenDarkenColor(col, amt) {
 
 makeGrid();
 
-let gridItems = document.querySelectorAll(".grid-item");
+let gridItems = document.querySelectorAll("#container > div");
 gridItems.forEach(gridItem => gridItem.addEventListener("mouseenter", changeColor));
