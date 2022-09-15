@@ -1,27 +1,11 @@
 const container = document.getElementById("container");
 
-const button = document.querySelector("button");
-button.addEventListener("click", newGrid);
+const customizeButton = document.getElementById("customize");
+customizeButton.addEventListener("click", newGrid);
 
-function makeGrid(num) {
-  container.style.setProperty('--grid-rows', num);
-  container.style.setProperty('--grid-cols', num);
-  
-  for (i = 0; i < num * num; i++) {
-    let gridItem = document.createElement("div");
-    container.appendChild(gridItem).className = "grid-item";
-  }
-}
-
-function removeGrid() {
-  while (container.hasChildNodes()) {
-    container.removeChild(container.firstChild);
-  }
-}
-
-function turnBlack() {
-  this.style.backgroundColor = "black";
-}
+let mode = 1;
+const modeButtons = document.querySelectorAll(".mode-button");
+modeButtons.forEach(modeButton => modeButton.addEventListener("click", setMode));
 
 function newGrid() {
   gridSize = prompt("Enter a number");
@@ -33,6 +17,43 @@ function newGrid() {
   makeGrid(gridSize);
   gridItems = document.querySelectorAll(".grid-item");
   gridItems.forEach(gridItem => gridItem.addEventListener("mouseenter", turnBlack));
+}
+
+function makeGrid(num) {
+  container.style.setProperty('--grid-rows', num);
+  container.style.setProperty('--grid-cols', num);
+  
+  for (i = 0; i < num * num; i++) { //Create num rows and columns 
+    let gridItem = document.createElement("div");
+    container.appendChild(gridItem).className = "grid-item";
+  }
+}
+
+function removeGrid() {
+  while (container.hasChildNodes()) {
+    container.removeChild(container.firstChild);
+  }
+}
+
+function setMode() {
+  switch (this.id) {
+    case "mode1":
+      mode = 1;
+      break;
+    
+    case "mode2":
+      mode = 2;
+      break;
+
+    case "mode3":
+      mode = 3;
+      break;
+  }
+  console.log(mode);
+}
+
+function turnBlack() {
+  this.style.backgroundColor = "black";
 }
 
 makeGrid(gridSize = 16);
