@@ -11,7 +11,7 @@ function getInput() {
   let input = "";
   do {
     input = prompt("Enter a number (maximum 100)");
-  } while (input > 100 || isNaN(input) || input == "");
+  } while (input > 100 || isNaN(input) || input == "" || input == 0);
   return input;
 }
 
